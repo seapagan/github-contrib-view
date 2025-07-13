@@ -4,7 +4,22 @@ version = "0.1.0"
 description = "View your GitHub contributions as a graph in the terminal."
 readme = "README.md"
 authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]
-requires-python = ">=3.10"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Utilities",
+]
 dependencies = [
     "pygithub>=2.6.1",
     "python-dotenv>=1.1.1",
@@ -43,12 +58,12 @@ changelog.cmd = "github-changelog-md"
 changelog.help = "Generate or Update the changelog"
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.9"
 
 [tool.ruff]
 extend-exclude = []
 line-length = 80
-target-version = "py310"
+target-version = "py39"
 
 [tool.ruff.format]
 indent-style = "space"

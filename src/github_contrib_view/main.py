@@ -1,6 +1,8 @@
 """Main module for the project."""
 
 # ruff: noqa: T201
+from __future__ import annotations
+
 import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone

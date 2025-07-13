@@ -4,7 +4,8 @@ certifi==2025.7.9
 cffi==1.17.1
 cfgv==3.4.0
 charset-normalizer==3.4.2
-click==8.2.1
+click==8.1.8 ; python_full_version < '3.10'
+click==8.2.1 ; python_full_version >= '3.10'
 colorama==0.4.6 ; sys_platform == 'win32'
 cryptography==45.0.5
 deprecated==1.2.18

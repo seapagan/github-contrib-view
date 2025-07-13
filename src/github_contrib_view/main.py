@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 from typing import NoReturn
 
 import requests
+import typer
 from dotenv import dotenv_values
 from rich import print as rprint
 
@@ -18,6 +19,12 @@ HTTP_OK = 200
 REQUEST_TIMEOUT = 10
 
 DAYS_PER_WEEK = 7
+
+app = typer.Typer(
+    pretty_exceptions_show_locals=False,
+    add_completion=False,
+    rich_markup_mode="rich",
+)
 
 
 def get_github_contributions(
@@ -240,8 +247,9 @@ def bad_env() -> NoReturn:
     sys.exit(1)
 
 
+@app.command()
 def main() -> None:
-    """Main entry point for the package."""
+    """Display your GitHub contributions for the last year to the console."""
     try:
         username = config["USERNAME"]
         token = config["GITHUB_PAT"]

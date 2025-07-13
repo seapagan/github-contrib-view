@@ -1,0 +1,113 @@
+[project]
+name = "github-contrib-view"
+version = "0.1.0"
+description = "View your GitHub contributions as a graph in the terminal."
+readme = "README.md"
+authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = [
+    "pygithub>=2.6.1",
+    "python-dotenv>=1.1.1",
+    "requests>=2.32.4",
+    "rich>=14.0.0",
+]
+
+[project.scripts]
+ghcview = "github_contrib_view.main:main"
+
+[build-system]
+requires = ["uv_build>=0.7.19,<0.8.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "github-changelog-md>=0.9.5",
+    "mypy>=1.16.0",
+    "poethepoet>=0.34.0",
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.13",
+    "types-requests>=2.32.4.20250611",
+]
+
+[tool.poe.tasks]
+# setup PoeThePoet tasks
+pre.cmd = "pre-commit run --all-files"
+pre.help = "Run pre-commit checks"
+mypy.cmd = "mypy . --strict"
+mypy.help = "Run mypy checks"
+format.cmd = "ruff format ."
+format.help = "Format code with Ruff"
+ruff.cmd = "ruff check --output-format=concise ."
+ruff.help = "Run Ruff checks"
+changelog.cmd = "github-changelog-md"
+changelog.help = "Generate or Update the changelog"
+
+[tool.mypy]
+python_version = "3.10"
+
+[tool.ruff]
+extend-exclude = []
+line-length = 80
+target-version = "py310"
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "double"
+
+[tool.ruff.lint]
+select = ["ALL"] # we are being very strict!
+ignore = [
+    "PGH003",
+    "FBT002",
+    "FBT003",
+    "B006",
+] # These rules are too strict even for us 😝
+extend-ignore = [
+    "COM812", # ignored for ruff formatting
+    "ISC001", # ignored for ruff formatting
+]
+
+[tool.ruff.lint.pep8-naming]
+classmethod-decorators = ["pydantic.validator", "pydantic.root_validator"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**/*.py" = [
+    "S101",   # we can (and MUST!) use 'assert' in test files.
+    "ANN001", # annotations for fixtures are sometimes a pain for test files.
+    "ARG001", # sometimes fixtures are not physically used but have side-effects
+    "ARG002", # as above
+]
+
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = []
+
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.pytest.ini_options]
+python_files = "tests.py test_*.py *_tests.py"
+addopts = [
+    "-m",
+    "not rewrite",  # mark tests 'rewrite' that need work, and they wont be run
+    "--cov",
+    "--cov-report",
+    "term-missing",
+    "--cov-report",
+    "html",
+]
+testpaths = ["tests"]
+mock_use_standalone_module = true
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*"]

@@ -200,7 +200,7 @@ def print_grid(
 
 
 def print_github_style_grid_full_year(
-    contributions: dict[str, int], *, use_ascii: bool
+    contributions: dict[str, int], options: dict[str, bool]
 ) -> None:
     """Print a full year GitHub-style contribution grid."""
     if not contributions:
@@ -223,7 +223,7 @@ def print_github_style_grid_full_year(
 
     print_header(start_date, end_date)
     print_month_header(start_date, end_date)
-    print_grid(start_date, end_date, contributions, use_ascii=use_ascii)
+    print_grid(start_date, end_date, contributions, use_ascii=options["ascii"])
 
     print()
 
@@ -242,15 +242,16 @@ def print_github_style_grid_full_year(
         else ("", 0)
     )
 
-    print("📊 Year Summary:")
-    print(f"   Total contributions: {total}")
-    print(f"   Active days: {active_days}/{len(year_contributions)}")
-    print(f"   Best day: {max_day[0]} ({max_day[1]} contributions)")
-    if year_contributions:
-        daily_average = total / len(year_contributions)
-        activity_rate = active_days / len(year_contributions) * 100
-        print(f"   Average per day: {daily_average:.1f}")
-        print(f"   Activity rate: {activity_rate:.1f}%")
+    if options["summary"]:
+        print("📊 Year Summary:")
+        print(f"   Total contributions: {total}")
+        print(f"   Active days: {active_days}/{len(year_contributions)}")
+        print(f"   Best day: {max_day[0]} ({max_day[1]} contributions)")
+        if year_contributions:
+            daily_average = total / len(year_contributions)
+            activity_rate = active_days / len(year_contributions) * 100
+            print(f"   Average per day: {daily_average:.1f}")
+            print(f"   Activity rate: {activity_rate:.1f}%")
 
 
 def print_contribution_list(contributions: dict[str, int]) -> None:
@@ -270,6 +271,9 @@ def bad_env() -> NoReturn:
 @app.command()
 def main(
     ascii: Annotated[bool, typer.Option(help="Use plain ASCII output")] = False,  # noqa: A002
+    summary: Annotated[
+        bool, typer.Option(help="Show a summary after the table")
+    ] = True,
 ) -> None:
     """Display your GitHub contributions for the last year to the console."""
     try:
@@ -280,9 +284,14 @@ def main(
     except KeyError:
         bad_env()
 
+    options = {
+        "ascii": ascii,
+        "summary": summary,
+    }
+
     contributions = get_github_contributions(username, token)
 
     # Print days with and without contributions
     if contributions:
         # print_contribution_list(contributions)  # noqa: ERA001
-        print_github_style_grid_full_year(contributions, use_ascii=ascii)
+        print_github_style_grid_full_year(contributions, options=options)

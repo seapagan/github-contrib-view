@@ -285,7 +285,7 @@ wheels = [
 
 [[package]]
 name = "github-changelog-md"
-version = "0.9.5"
+version = "0.9.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pygithub" },
@@ -294,9 +294,9 @@ dependencies = [
     { name = "simple-toml-settings" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/bc/27/612be87e501a7acc89d6c2a96ec598392e9f07ea9c94dfe4693ce587a8ad/github_changelog_md-0.9.5.tar.gz", hash = "sha256:d9aaa00bbcbd1fb3aa5a30a8227ce156c7df9a0c77d92ae085204833d7c0333d", size = 19538, upload-time = "2024-08-17T17:13:26.71Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/54/8e/17b9c0fdc0ea60636195f9c108ad4a1b0e27705a0cdec2ae4ae187ead03e/github_changelog_md-0.9.6.tar.gz", hash = "sha256:011558e664fe6ae3e414478d6467754bedc4268590ac8dca7e5265b90c55cd74", size = 217424, upload-time = "2025-07-13T13:06:38.299Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/c5/c8ad1efa195bf76db3f0fb2ac4c1a4f214bf46274762af4bd2df05df406d/github_changelog_md-0.9.5-py3-none-any.whl", hash = "sha256:eeae8f954a37a7fba00b922e56be7e3f89a91fc8156ce99dbd10be20e4ec1ee5", size = 18659, upload-time = "2024-08-17T17:13:25.227Z" },
+    { url = "https://files.pythonhosted.org/packages/cf/9c/59c4c0239938c437190de6c04fb48c77e43fc5613a9d2967a9634af5e76d/github_changelog_md-0.9.6-py3-none-any.whl", hash = "sha256:ef62b1df65ae7dd5254817d2385629982775d130130d46c78ff4979a48fb0f2d", size = 18551, upload-time = "2025-07-13T13:06:36.758Z" },
 ]
 
 [[package]]
@@ -308,6 +308,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "rich" },
+    { name = "typer" },
 ]
 
 [package.dev-dependencies]
@@ -326,6 +327,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.4" },
     { name = "rich", specifier = ">=14.0.0" },
+    { name = "typer", specifier = ">=0.16.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -815,7 +817,7 @@ wheels = [
 
 [[package]]
 name = "typer"
-version = "0.12.5"
+version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click", version = "8.1.8", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
@@ -824,9 +826,9 @@ dependencies = [
     { name = "shellingham" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c5/58/a79003b91ac2c6890fc5d90145c662fd5771c6f11447f116b63300436bc9/typer-0.12.5.tar.gz", hash = "sha256:f592f089bedcc8ec1b974125d64851029c3b1af145f04aca64d69410f0c9b722", size = 98953, upload-time = "2024-08-24T21:17:57.346Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c5/8c/7d682431efca5fd290017663ea4588bf6f2c6aad085c7f108c5dbc316e70/typer-0.16.0.tar.gz", hash = "sha256:af377ffaee1dbe37ae9440cb4e8f11686ea5ce4e9bae01b84ae7c63b87f1dd3b", size = 102625, upload-time = "2025-05-26T14:30:31.824Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a8/2b/886d13e742e514f704c33c4caa7df0f3b89e5a25ef8db02aa9ca3d9535d5/typer-0.12.5-py3-none-any.whl", hash = "sha256:62fe4e471711b147e3365034133904df3e235698399bc4de2b36c8579298d52b", size = 47288, upload-time = "2024-08-24T21:17:55.451Z" },
+    { url = "https://files.pythonhosted.org/packages/76/42/3efaf858001d2c2913de7f354563e3a3a2f0decae3efe98427125a8f441e/typer-0.16.0-py3-none-any.whl", hash = "sha256:1f79bed11d4d02d4310e3c1b7ba594183bcedb0ac73b27a9e5f28f6fb5b98855", size = 46317, upload-time = "2025-05-26T14:30:30.523Z" },
 ]
 
 [[package]]

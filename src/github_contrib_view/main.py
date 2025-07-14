@@ -6,9 +6,10 @@ from __future__ import annotations
 import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone
-from typing import NoReturn
+from typing import Annotated, NoReturn
 
 import requests
+import typer
 from dotenv import dotenv_values
 from rich import print as rprint
 
@@ -18,6 +19,12 @@ HTTP_OK = 200
 REQUEST_TIMEOUT = 10
 
 DAYS_PER_WEEK = 7
+
+app = typer.Typer(
+    pretty_exceptions_show_locals=False,
+    add_completion=False,
+    rich_markup_mode="rich",
+)
 
 
 def get_github_contributions(
@@ -76,14 +83,30 @@ def get_github_contributions(
     return None
 
 
-def get_symbol(count: int) -> str:
+def get_symbol(count: int, *, use_ascii: bool = False) -> str:
     """Return the relevant emoji symbol.
 
     This depends on the contribution count passed.
     """
     thresholds = [1, 4, 7, 10]
-    # use colored emoji blocks ...
-    symbols = ["\u2b1c", "\U0001f7e9", "\U0001f7e8", "\U0001f7e7", "\U0001f7e5"]
+    if use_ascii:
+        symbols = [
+            "\u25a0 ",
+            "[green3]\u25a0 [/green3]",
+            "[yellow3]\u25a0 [/yellow3]",
+            "[orange3]\u25a0 [/orange3]",
+            "[red3]\u25a0 [/red3]",
+        ]
+    else:
+        # use colored emoji blocks ...
+        symbols = [
+            "\u2b1c",
+            "\U0001f7e9",
+            "\U0001f7e8",
+            "\U0001f7e7",
+            "\U0001f7e5",
+        ]
+
     return symbols[bisect_left(thresholds, count + 1)]
 
 
@@ -101,7 +124,7 @@ def print_legend() -> None:
     legend_items = [
         f"{get_symbol(count)} {label}" for count, label in legend_data
     ]
-    print("Legend: " + "   ".join(legend_items))
+    rprint("Legend: " + "   ".join(legend_items))
 
 
 def print_header(start_date: datetime, end_date: datetime) -> None:
@@ -148,7 +171,11 @@ def print_month_header(start_date: datetime, end_date: datetime) -> None:
 
 
 def print_grid(
-    start_date: datetime, end_date: datetime, contributions: dict[str, int]
+    start_date: datetime,
+    end_date: datetime,
+    contributions: dict[str, int],
+    *,
+    use_ascii: bool,
 ) -> None:
     """Generate and print out the actual contributions grid."""
     day_names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -167,13 +194,13 @@ def print_grid(
 
             date_str = current_day.strftime("%Y-%m-%d")
             count = contributions.get(date_str, 0)
-            row += get_symbol(count)  # Each emoji takes 2 character widths
+            row += get_symbol(count, use_ascii=use_ascii)
 
-        print(row)
+        rprint(row)
 
 
 def print_github_style_grid_full_year(
-    contributions: dict[str, int],
+    contributions: dict[str, int], options: dict[str, bool]
 ) -> None:
     """Print a full year GitHub-style contribution grid."""
     if not contributions:
@@ -196,7 +223,7 @@ def print_github_style_grid_full_year(
 
     print_header(start_date, end_date)
     print_month_header(start_date, end_date)
-    print_grid(start_date, end_date, contributions)
+    print_grid(start_date, end_date, contributions, use_ascii=options["ascii"])
 
     print()
 
@@ -215,15 +242,16 @@ def print_github_style_grid_full_year(
         else ("", 0)
     )
 
-    print("📊 Year Summary:")
-    print(f"   Total contributions: {total}")
-    print(f"   Active days: {active_days}/{len(year_contributions)}")
-    print(f"   Best day: {max_day[0]} ({max_day[1]} contributions)")
-    if year_contributions:
-        daily_average = total / len(year_contributions)
-        activity_rate = active_days / len(year_contributions) * 100
-        print(f"   Average per day: {daily_average:.1f}")
-        print(f"   Activity rate: {activity_rate:.1f}%")
+    if options["summary"]:
+        print("📊 Year Summary:")
+        print(f"   Total contributions: {total}")
+        print(f"   Active days: {active_days}/{len(year_contributions)}")
+        print(f"   Best day: {max_day[0]} ({max_day[1]} contributions)")
+        if year_contributions:
+            daily_average = total / len(year_contributions)
+            activity_rate = active_days / len(year_contributions) * 100
+            print(f"   Average per day: {daily_average:.1f}")
+            print(f"   Activity rate: {activity_rate:.1f}%")
 
 
 def print_contribution_list(contributions: dict[str, int]) -> None:
@@ -240,8 +268,14 @@ def bad_env() -> NoReturn:
     sys.exit(1)
 
 
-def main() -> None:
-    """Main entry point for the package."""
+@app.command()
+def main(
+    ascii: Annotated[bool, typer.Option(help="Use plain ASCII output")] = False,  # noqa: A002
+    summary: Annotated[
+        bool, typer.Option(help="Show a summary after the table")
+    ] = True,
+) -> None:
+    """Display your GitHub contributions for the last year to the console."""
     try:
         username = config["USERNAME"]
         token = config["GITHUB_PAT"]
@@ -250,9 +284,14 @@ def main() -> None:
     except KeyError:
         bad_env()
 
+    options = {
+        "ascii": ascii,
+        "summary": summary,
+    }
+
     contributions = get_github_contributions(username, token)
 
     # Print days with and without contributions
     if contributions:
-        print_contribution_list(contributions)
-        print_github_style_grid_full_year(contributions)
+        # print_contribution_list(contributions)  # noqa: ERA001
+        print_github_style_grid_full_year(contributions, options=options)

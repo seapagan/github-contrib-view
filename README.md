@@ -52,7 +52,7 @@ GITHUB_PAT=ghp_xxxxxxxxxxxxxxxxxxxxxxxxx # the PAT you generated.
 Instead of this, you can specify either or both from the command line. These
 will take preference over any environment variables:
 
-```bash
+```console
 ghcview --username seapagan --token ghp_xxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 

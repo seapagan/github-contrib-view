@@ -3,26 +3,39 @@
 A Python package to view your GitHub yearly contributions in the terminal,
 duplicating the 'grass' map from your GitHub profile pages.
 
-Right now this app has minimal functionality and configuration, I have just
-packaged it to save the name. It will become much more useful very quickly!
+Right now this app has minimal functionality and configuration, it will become
+much more useful very quickly!
 
 ## Installation
 
-You can install the package using uv:
+You can install the package as a standalone tool using
+[`uv`](https://docs.astral.sh/uv/):
 
-```bash
-uv install github-contrib-view
+```console
+uv tool install github-contrib-view
+```
+
+or `pipx`:
+
+```console
+pipx  install github-contrib-view
+```
+
+Or simply use `pip` to install to your current virtualenv or global python:
+
+```console
+pip install github-contrib-view
 ```
 
 If you prefer to install it manually, you can clone the repository and run the
 following command:
 
-```bash
+```console
 uv sync
 source .venv/bin/activate # or .venv/Scripts/activate on Windows
 ```
 
-In either case, you will need to have `uv` installed.
+In the above case, you will need to have `uv` installed.
 
 ## Setup
 
@@ -36,14 +49,28 @@ USERNAME=seapagan # YOUR GitHub username
 GITHUB_PAT=ghp_xxxxxxxxxxxxxxxxxxxxxxxxx # the PAT you generated.
 ```
 
-Very shortly this will be set from a config file and the command line.
+Instead of this, you can specify either or both from the command line. These
+will take preference over any environment variables:
+
+```bash
+ghcview --username seapagan --token ghp_xxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+You can use either or both.
 
 ## Usage
 
-Right now there are no options nor settings. Run the viewer as:
+Run the viewer as:
 
 ```console
 ghcview
 ```
 
-The output uses emojie's for the colored boxes, ASCII-only mode is coming.
+Currently there are 3 CLI options in addition to the `--username` and `--token`
+mentioned above:
+
+- `--ascii` / `--no-ascii` : Use ASCII characters instead of the default emojis
+  for the coloured boxes. Default is `--no-ascii`.
+- `--summary` / `--no-summary` : Display a summary of the past year's
+  contribuitions under the chart. Default is `--summary`.
+- `--help` : Display brief help for the program.

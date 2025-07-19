@@ -3,6 +3,9 @@
 certifi==2025.7.9
 cffi==1.17.1
 charset-normalizer==3.4.2
+click==8.1.8 ; python_full_version < '3.10'
+click==8.2.1 ; python_full_version >= '3.10'
+colorama==0.4.6 ; sys_platform == 'win32'
 cryptography==45.0.5
 deprecated==1.2.18
 idna==3.10
@@ -16,6 +19,8 @@ pynacl==1.5.0
 python-dotenv==1.1.1
 requests==2.32.4
 rich==14.0.0
+shellingham==1.5.4
+typer==0.16.0
 typing-extensions==4.14.1
 urllib3==2.5.0
 wrapt==1.17.2

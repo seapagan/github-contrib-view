@@ -263,13 +263,22 @@ def print_contribution_list(contributions: dict[str, int]) -> None:
 
 def bad_env() -> NoReturn:
     """Exit with a message if the .env is not set."""
-    err_str = "[red]USERNAME and GITHUB_PAT must be set in .env file, exiting."
+    err_str = (
+        "[red]USERNAME and GITHUB_PAT must be set in .env file or "
+        "passed as a CLI option, exiting."
+    )
     rprint(err_str)
     sys.exit(1)
 
 
 @app.command()
 def main(
+    username: Annotated[
+        str, typer.Option(help="GitHub Username to query")
+    ] = "",
+    token: Annotated[
+        str, typer.Option(help="GitHub Personal Access Token")
+    ] = "",
     ascii: Annotated[bool, typer.Option(help="Use plain ASCII output")] = False,  # noqa: A002
     summary: Annotated[
         bool, typer.Option(help="Show a summary after the table")
@@ -277,8 +286,10 @@ def main(
 ) -> None:
     """Display your GitHub contributions for the last year to the console."""
     try:
-        username = config["USERNAME"]
-        token = config["GITHUB_PAT"]
+        if not username:
+            username = str(config["USERNAME"])
+        if not token:
+            token = str(config["GITHUB_PAT"])
         if username is None or token is None:
             bad_env()
     except KeyError:

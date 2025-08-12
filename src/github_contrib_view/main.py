@@ -3,6 +3,8 @@
 # ruff: noqa: T201
 from __future__ import annotations
 
+import contextlib
+import locale
 import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone
@@ -14,6 +16,10 @@ from dotenv import dotenv_values
 from rich import print as rprint
 
 config = dotenv_values(".env")
+
+# Set locale for date formatting (falls back to system default)
+with contextlib.suppress(locale.Error):
+    locale.setlocale(locale.LC_TIME, "")
 
 HTTP_OK = 200
 REQUEST_TIMEOUT = 10
@@ -130,10 +136,7 @@ def print_legend() -> None:
 def print_header(start_date: datetime, end_date: datetime) -> None:
     """Print out the header and legend."""
     print("\n🎨 GitHub Contributions - Full Year")
-    print(
-        f"📅 {start_date.strftime('%Y-%m-%d')} to "
-        f"{end_date.strftime('%Y-%m-%d')}\n"
-    )
+    print(f"📅 {start_date.strftime('%x')} to {end_date.strftime('%x')}\n")
     print_legend()
     print()
 
@@ -246,7 +249,14 @@ def print_github_style_grid_full_year(
         print("📊 Year Summary:")
         print(f"   Total contributions: {total}")
         print(f"   Active days: {active_days}/{len(year_contributions)}")
-        print(f"   Best day: {max_day[0]} ({max_day[1]} contributions)")
+        best_day_formatted = (
+            datetime.strptime(max_day[0], "%Y-%m-%d")
+            .replace(tzinfo=timezone.utc)
+            .strftime("%x")
+            if max_day[0]
+            else ""
+        )
+        print(f"   Best day: {best_day_formatted} ({max_day[1]} contributions)")
         if year_contributions:
             daily_average = total / len(year_contributions)
             activity_rate = active_days / len(year_contributions) * 100

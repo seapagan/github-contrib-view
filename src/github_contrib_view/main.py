@@ -5,16 +5,15 @@ from __future__ import annotations
 
 import contextlib
 import locale
-import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone
-from typing import Annotated, NoReturn, TypedDict
+from typing import NoReturn, Optional, TypedDict
 
 import requests
 import typer
-from dotenv import dotenv_values
 from rich import print as rprint
 
+from github_contrib_view.config import settings
 from github_contrib_view.constants import (
     DAYS_PER_WEEK,
     HTTP_OK,
@@ -30,9 +29,8 @@ class ContribOptions(TypedDict):
     ascii: bool
     summary: bool
     username: str
+    token: str
 
-
-config = dotenv_values(".env")
 
 # Set locale for date formatting (falls back to system default)
 with contextlib.suppress(locale.Error):
@@ -72,7 +70,7 @@ def get_github_contributions(
             f"[red]Error[/red] : User '{username}' cannot be found on GitHub, "
             "[red]Exiting[/red]"
         )
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
     if response.status_code == HTTP_OK:
         weeks = data["data"]["user"]["contributionsCollection"][
@@ -286,44 +284,60 @@ def print_contribution_list(contributions: dict[str, int]) -> None:
 def bad_env() -> NoReturn:
     """Exit with a message if the .env is not set."""
     err_str = (
-        "[red]USERNAME and GITHUB_PAT must be set in .env file or "
-        "passed as a CLI option, exiting."
+        "[red]USERNAME and GITHUB_PAT must be set in the config file or "
+        "passed as a CLI option. Exiting."
     )
     rprint(err_str)
-    sys.exit(2)
+    raise typer.Exit(code=2)
 
 
 @app.command()
 def main(
-    username: Annotated[
-        str, typer.Option(help="GitHub Username to query")
-    ] = "",
-    token: Annotated[
-        str, typer.Option(help="GitHub Personal Access Token")
-    ] = "",
-    ascii: Annotated[bool, typer.Option(help="Use plain ASCII output")] = False,  # noqa: A002
-    summary: Annotated[
-        bool, typer.Option(help="Show a summary after the table")
-    ] = True,
+    username: Optional[str] = typer.Option(
+        None,
+        "--username",
+        "-u",
+        help="GitHub Username to query",
+        show_default=False,
+    ),
+    token: Optional[str] = typer.Option(
+        None,
+        "--token",
+        "-t",
+        help="GitHub Personal Access Token",
+        show_default=False,
+    ),
+    *,
+    ascii_mode: Optional[bool] = typer.Option(
+        None,
+        "--ascii",
+        "-a",
+        help="Use plain ASCII output",
+    ),
+    summary: Optional[bool] = typer.Option(
+        None,
+        "--summary",
+        "-s",
+        help="Show a summary after the table",
+    ),
 ) -> None:
     """Display your GitHub contributions for the last year to the console."""
+    options: ContribOptions = {
+        "ascii": ascii_mode or settings.ascii,
+        "summary": summary or settings.summary,
+        "username": username or settings.username,
+        "token": token or settings.token,
+    }
+
     try:
-        if not username:
-            username = str(config["USERNAME"])
-        if not token:
-            token = str(config["GITHUB_PAT"])
-        if username is None or token is None:
+        if options["username"] == "" or options["token"] == "":
             bad_env()
     except KeyError:
         bad_env()
 
-    options: ContribOptions = {
-        "ascii": ascii,
-        "summary": summary,
-        "username": username,
-    }
-
-    contributions = get_github_contributions(username, token)
+    contributions = get_github_contributions(
+        options["username"], options["token"]
+    )
 
     # Print days with and without contributions
     if contributions:

@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.10'",
@@ -305,9 +305,9 @@ version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "pygithub" },
-    { name = "python-dotenv" },
     { name = "requests" },
     { name = "rich" },
+    { name = "simple-toml-settings" },
     { name = "typer" },
 ]
 
@@ -324,9 +324,9 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "pygithub", specifier = ">=2.6.1" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.4" },
     { name = "rich", specifier = ">=14.0.0" },
+    { name = "simple-toml-settings", specifier = ">=0.9.1" },
     { name = "typer", specifier = ">=0.16.0" },
 ]
 
@@ -569,15 +569,6 @@ wheels = [
 ]
 
 [[package]]
-name = "python-dotenv"
-version = "1.1.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/f6/b0/4bc07ccd3572a2f9df7e6782f52b0c6c90dcbb803ac4a167702d7d0dfe1e/python_dotenv-1.1.1.tar.gz", hash = "sha256:a8a6399716257f45be6a007360200409fce5cda2661e3dec71d23dc15f6189ab", size = 41978, upload-time = "2025-06-24T04:21:07.341Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/5f/ed/539768cf28c661b5b068d66d96a2f155c4971a5d55684a514c1a0e0dec2f/python_dotenv-1.1.1-py3-none-any.whl", hash = "sha256:31f23644fe2602f88ff55e1f5c79ba497e01224ee7737937930c448e4d0e24dc", size = 20556, upload-time = "2025-06-24T04:21:06.073Z" },
-]
-
-[[package]]
 name = "pyyaml"
 version = "6.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -766,14 +757,14 @@ wheels = [
 
 [[package]]
 name = "simple-toml-settings"
-version = "0.9.0"
+version = "0.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "rtoml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/8a/c7b8d61a635be56fec000a673e2696ba5fccbc893a6c5bafdc8516ae248c/simple_toml_settings-0.9.0.tar.gz", hash = "sha256:64070c7e011c007e41b73455c309a514c9ccec6a4581ee46a6af643e5dbf00d6", size = 105798, upload-time = "2025-01-16T12:06:00.362Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ad/cc/e04aafe9409660c95a2b24edbea85dc957d260d89e4a5d427c33a922162c/simple_toml_settings-0.9.1.tar.gz", hash = "sha256:f51a45ffe8d0e03de617237017529d42e7041625cf781110336021dc21199024", size = 114338, upload-time = "2025-08-10T10:05:10.625Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/da/23380ea62d22c06b6ff2a485fa701c8bf0243e6f4a1ef70e82fcc3b8867a/simple_toml_settings-0.9.0-py3-none-any.whl", hash = "sha256:943ef93223085fde9016b3d8b3f2eb04e346df58449bc1c9de32358191559d20", size = 8364, upload-time = "2025-01-16T12:05:55.716Z" },
+    { url = "https://files.pythonhosted.org/packages/87/b9/bcf41ee447ca6338edc9e591940ccbaf6c7a9dc8f53da2e126b27da33378/simple_toml_settings-0.9.1-py3-none-any.whl", hash = "sha256:5e726f6516160530ade18caa136eaa42c04217b92755bc50b2c028b31d0056f0", size = 8353, upload-time = "2025-08-10T10:05:09.168Z" },
 ]
 
 [[package]]

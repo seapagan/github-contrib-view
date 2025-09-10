@@ -1,6 +1,6 @@
 [project]
 name = "github-contrib-view"
-version = "0.2.0"
+version = "0.3.0"
 description = "View your GitHub contributions as a graph in the terminal."
 readme = "README.md"
 authors = [{ name = "Grant Ramsay", email = "seapagan@gmail.com" }]

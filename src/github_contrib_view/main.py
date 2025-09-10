@@ -8,12 +8,22 @@ import locale
 import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone
-from typing import Annotated, NoReturn
+from typing import Annotated, NoReturn, TypedDict
 
 import requests
 import typer
 from dotenv import dotenv_values
 from rich import print as rprint
+
+
+# Define a TypedDict for options
+class ContribOptions(TypedDict):
+    """TypedDict for contribution display options."""
+
+    ascii: bool
+    summary: bool
+    username: str
+
 
 config = dotenv_values(".env")
 
@@ -133,10 +143,15 @@ def print_legend() -> None:
     rprint("Legend: " + "   ".join(legend_items))
 
 
-def print_header(start_date: datetime, end_date: datetime) -> None:
+def print_header(
+    start_date: datetime, end_date: datetime, options: ContribOptions
+) -> None:
     """Print out the header and legend."""
-    print("\n🎨 GitHub Contributions - Full Year")
-    print(f"📅 {start_date.strftime('%x')} to {end_date.strftime('%x')}\n")
+    rprint(
+        f"\n🎨 [bold]{options['username'].capitalize()}'s[/bold] "
+        "GitHub Contributions for the last year "
+        f"({start_date.strftime('%x')} to {end_date.strftime('%x')})\n"
+    )
     print_legend()
     print()
 
@@ -203,7 +218,7 @@ def print_grid(
 
 
 def print_github_style_grid_full_year(
-    contributions: dict[str, int], options: dict[str, bool]
+    contributions: dict[str, int], options: ContribOptions
 ) -> None:
     """Print a full year GitHub-style contribution grid."""
     if not contributions:
@@ -224,7 +239,7 @@ def print_github_style_grid_full_year(
     days_since_sunday = (start_date.weekday() + 1) % 7
     start_date = start_date - timedelta(days=days_since_sunday)
 
-    print_header(start_date, end_date)
+    print_header(start_date, end_date, options=options)
     print_month_header(start_date, end_date)
     print_grid(start_date, end_date, contributions, use_ascii=options["ascii"])
 
@@ -305,9 +320,10 @@ def main(
     except KeyError:
         bad_env()
 
-    options = {
+    options: ContribOptions = {
         "ascii": ascii,
         "summary": summary,
+        "username": username,
     }
 
     contributions = get_github_contributions(username, token)

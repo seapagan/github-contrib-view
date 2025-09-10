@@ -150,9 +150,9 @@ def print_header(
     """Print out the header and legend."""
     rprint(
         f"\n🎨 GitHub Contributions for [bold]{options['username']}[/bold] "
-        "for the last Year"
+        "for the last year "
+        f"({start_date.strftime('%x')} to {end_date.strftime('%x')})\n"
     )
-    print(f"📅 {start_date.strftime('%x')} to {end_date.strftime('%x')}\n")
     print_legend()
     print()
 

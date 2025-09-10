@@ -24,7 +24,6 @@ classifiers = [
 ]
 dependencies = [
     "pygithub>=2.6.1",
-    "python-dotenv>=1.1.1",
     "requests>=2.32.4",
     "rich>=14.0.0",
     "simple-toml-settings>=0.9.1",

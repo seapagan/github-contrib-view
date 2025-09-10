@@ -5,14 +5,12 @@ from __future__ import annotations
 
 import contextlib
 import locale
-import sys
 from bisect import bisect_left
 from datetime import datetime, timedelta, timezone
 from typing import NoReturn, Optional, TypedDict
 
 import requests
 import typer
-from dotenv import dotenv_values
 from rich import print as rprint
 
 from github_contrib_view.config import settings
@@ -33,8 +31,6 @@ class ContribOptions(TypedDict):
     username: str
     token: str
 
-
-config = dotenv_values(".env")
 
 # Set locale for date formatting (falls back to system default)
 with contextlib.suppress(locale.Error):

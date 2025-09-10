@@ -312,7 +312,7 @@ def main(
         show_default=False,
     ),
     *,
-    ascii: Optional[bool] = typer.Option(  # noqa: A002
+    ascii_mode: Optional[bool] = typer.Option(
         None,
         "--ascii",
         "-a",
@@ -327,7 +327,7 @@ def main(
 ) -> None:
     """Display your GitHub contributions for the last year to the console."""
     options: ContribOptions = {
-        "ascii": ascii or settings.ascii,
+        "ascii": ascii_mode or settings.ascii,
         "summary": summary or settings.summary,
         "username": username or settings.username,
         "token": token or settings.token,

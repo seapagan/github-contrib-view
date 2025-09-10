@@ -15,4 +15,5 @@ class Settings(TOMLSettings):
 settings = Settings.get_instance(
     "ghcview",
     xdg_config=True,
+    allow_missing_file=True,
 )

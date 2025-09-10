@@ -104,6 +104,11 @@ Currently there are 5 CLI options:
   chart. Optional, defaults to True.
 - `--help` : Display brief help for the program.
 
+> **IMPORTANT**
+>
+> The ability to use Environment Variables `USERNAME` and `GITHUB_PAT` to set
+> the username/token was **REMOVED** in version 0.3.0
+
 ## Usage
 
 Run the viewer as:

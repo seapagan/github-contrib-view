@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.10'",
@@ -308,6 +308,7 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "rich" },
+    { name = "simple-toml-settings" },
     { name = "typer" },
 ]
 
@@ -327,6 +328,7 @@ requires-dist = [
     { name = "python-dotenv", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.4" },
     { name = "rich", specifier = ">=14.0.0" },
+    { name = "simple-toml-settings", specifier = ">=0.9.1" },
     { name = "typer", specifier = ">=0.16.0" },
 ]
 
@@ -766,14 +768,14 @@ wheels = [
 
 [[package]]
 name = "simple-toml-settings"
-version = "0.9.0"
+version = "0.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "rtoml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/23/8a/c7b8d61a635be56fec000a673e2696ba5fccbc893a6c5bafdc8516ae248c/simple_toml_settings-0.9.0.tar.gz", hash = "sha256:64070c7e011c007e41b73455c309a514c9ccec6a4581ee46a6af643e5dbf00d6", size = 105798, upload-time = "2025-01-16T12:06:00.362Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ad/cc/e04aafe9409660c95a2b24edbea85dc957d260d89e4a5d427c33a922162c/simple_toml_settings-0.9.1.tar.gz", hash = "sha256:f51a45ffe8d0e03de617237017529d42e7041625cf781110336021dc21199024", size = 114338, upload-time = "2025-08-10T10:05:10.625Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/da/23380ea62d22c06b6ff2a485fa701c8bf0243e6f4a1ef70e82fcc3b8867a/simple_toml_settings-0.9.0-py3-none-any.whl", hash = "sha256:943ef93223085fde9016b3d8b3f2eb04e346df58449bc1c9de32358191559d20", size = 8364, upload-time = "2025-01-16T12:05:55.716Z" },
+    { url = "https://files.pythonhosted.org/packages/87/b9/bcf41ee447ca6338edc9e591940ccbaf6c7a9dc8f53da2e126b27da33378/simple_toml_settings-0.9.1-py3-none-any.whl", hash = "sha256:5e726f6516160530ade18caa136eaa42c04217b92755bc50b2c028b31d0056f0", size = 8353, upload-time = "2025-08-10T10:05:09.168Z" },
 ]
 
 [[package]]

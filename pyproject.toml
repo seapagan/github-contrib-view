@@ -27,6 +27,7 @@ dependencies = [
     "python-dotenv>=1.1.1",
     "requests>=2.32.4",
     "rich>=14.0.0",
+    "simple-toml-settings>=0.9.1",
     "typer>=0.16.0",
 ]
 

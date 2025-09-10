@@ -15,6 +15,7 @@ import typer
 from dotenv import dotenv_values
 from rich import print as rprint
 
+from github_contrib_view.config import settings
 from github_contrib_view.constants import (
     DAYS_PER_WEEK,
     HTTP_OK,

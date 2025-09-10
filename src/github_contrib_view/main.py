@@ -15,6 +15,13 @@ import typer
 from dotenv import dotenv_values
 from rich import print as rprint
 
+from github_contrib_view.constants import (
+    DAYS_PER_WEEK,
+    HTTP_OK,
+    QUERY,
+    REQUEST_TIMEOUT,
+)
+
 
 # Define a TypedDict for options
 class ContribOptions(TypedDict):
@@ -31,10 +38,6 @@ config = dotenv_values(".env")
 with contextlib.suppress(locale.Error):
     locale.setlocale(locale.LC_TIME, "")
 
-HTTP_OK = 200
-REQUEST_TIMEOUT = 10
-
-DAYS_PER_WEEK = 7
 
 app = typer.Typer(
     pretty_exceptions_show_locals=False,
@@ -50,24 +53,6 @@ def get_github_contributions(
 
     You need a GitHub Personal Access Token
     """
-    # GraphQL query to get contribution data
-    query = """
-    query($username: String!) {
-        user(login: $username) {
-            contributionsCollection {
-                contributionCalendar {
-                    weeks {
-                        contributionDays {
-                            date
-                            contributionCount
-                        }
-                    }
-                }
-            }
-        }
-    }
-    """
-
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
@@ -75,7 +60,7 @@ def get_github_contributions(
 
     response = requests.post(
         "https://api.github.com/graphql",
-        json={"query": query, "variables": {"username": username}},
+        json={"query": QUERY, "variables": {"username": username}},
         headers=headers,
         timeout=REQUEST_TIMEOUT,
     )

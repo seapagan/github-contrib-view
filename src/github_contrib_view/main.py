@@ -80,8 +80,16 @@ def get_github_contributions(
         timeout=REQUEST_TIMEOUT,
     )
 
+    data = response.json()
+
+    if data["data"]["user"] is None:
+        rprint(
+            f"[red]Error[/red] : User '{username}' cannot be found on GitHub, "
+            "[red]Exiting[/red]"
+        )
+        sys.exit(1)
+
     if response.status_code == HTTP_OK:
-        data = response.json()
         weeks = data["data"]["user"]["contributionsCollection"][
             "contributionCalendar"
         ]["weeks"]
@@ -297,7 +305,7 @@ def bad_env() -> NoReturn:
         "passed as a CLI option, exiting."
     )
     rprint(err_str)
-    sys.exit(1)
+    sys.exit(2)
 
 
 @app.command()

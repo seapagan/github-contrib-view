@@ -280,7 +280,11 @@ def print_github_style_grid_full_year(
 
 
 def print_contribution_list(contributions: dict[str, int]) -> None:
-    """Print a list of all contributions by date."""
+    """Print a list of all contributions by date.
+
+    This is really a debug function and will probably not be available from the
+    CLI.
+    """
     for date, count in contributions.items():
         status = "✅ Contributed" if count > 0 else "❌ No contribution"
         print(f"{date}: {count} contributions - {status}")
@@ -330,5 +334,4 @@ def main(
 
     # Print days with and without contributions
     if contributions:
-        # print_contribution_list(contributions)  # noqa: ERA001
         print_github_style_grid_full_year(contributions, options=options)

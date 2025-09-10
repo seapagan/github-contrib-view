@@ -23,7 +23,6 @@ class ContribOptions(TypedDict):
     ascii: bool
     summary: bool
     username: str
-    token: str
 
 
 config = dotenv_values(".env")
@@ -325,7 +324,6 @@ def main(
         "ascii": ascii,
         "summary": summary,
         "username": username,
-        "token": token,
     }
 
     contributions = get_github_contributions(username, token)

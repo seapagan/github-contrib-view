@@ -16,10 +16,11 @@ pygithub==2.6.1
 pygments==2.19.2
 pyjwt==2.10.1
 pynacl==1.5.0
-python-dotenv==1.1.1
 requests==2.32.4
 rich==14.0.0
+rtoml==0.12.0
 shellingham==1.5.4
+simple-toml-settings==0.9.1
 typer==0.16.0
 typing-extensions==4.14.1
 urllib3==2.5.0

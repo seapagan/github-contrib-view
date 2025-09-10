@@ -302,12 +302,14 @@ def main(
         "--username",
         "-u",
         help="GitHub Username to query",
+        show_default=False,
     ),
     token: Optional[str] = typer.Option(
         None,
         "--token",
         "-t",
         help="GitHub Personal Access Token",
+        show_default=False,
     ),
     *,
     ascii: Optional[bool] = typer.Option(  # noqa: A002

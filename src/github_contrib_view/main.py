@@ -74,7 +74,7 @@ def get_github_contributions(
             f"[red]Error[/red] : User '{username}' cannot be found on GitHub, "
             "[red]Exiting[/red]"
         )
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
     if response.status_code == HTTP_OK:
         weeks = data["data"]["user"]["contributionsCollection"][
@@ -292,7 +292,7 @@ def bad_env() -> NoReturn:
         "passed as a CLI option. Exiting."
     )
     rprint(err_str)
-    sys.exit(2)
+    raise typer.Exit(code=2)
 
 
 @app.command()

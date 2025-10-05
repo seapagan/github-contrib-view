@@ -3,7 +3,7 @@
 Ideas for functionality to add in the future:
 
 - [x] User `typer` to set up a functional CLI
-- [ ] Add config file functionality
+- [x] Add config file functionality
 - [x] Add an ascii view if emoji not available or desired using rich for colors.
 - [ ] Add some way to autodetect if emoji available and automatically use ascii
   if not.

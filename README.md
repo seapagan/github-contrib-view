@@ -14,7 +14,7 @@ coming.
 - [Installation](#installation)
 - [Setup](#setup)
   - [Setup a configuration File](#setup-a-configuration-file)
-    - [Example config file (`~/.config/config.toml`)](#example-config-file-configconfigtoml)
+    - [Example config file (`~/.config/ghcview/config.toml`)](#example-config-file-configghcviewconfigtoml)
   - [Configure from the CLI](#configure-from-the-cli)
 - [Usage](#usage)
 
@@ -50,7 +50,7 @@ This is entirely optional, but is the best way to set the `username` and `token`
 variables to avoid having to specify them each time you run the tool.
 
 You will need to create the config file manually, it should be named
-**config.toml** and placed in the **~/.config/ghcview** folder (you will need to
+**config.toml** and placed in the **~/.config/ghcview/** folder (you will need to
 create the folder too).
 
 The configuration is in TOML format, and currently has 4 possible variables:
@@ -73,7 +73,7 @@ The configuration is in TOML format, and currently has 4 possible variables:
 
 The first line of the file should contain the section header `[ghcview]`
 
-#### Example config file (`~/.config/config.toml`)
+#### Example config file (`~/.config/ghcview/config.toml`)
 
 ```toml
 [ghcview]

@@ -5,19 +5,24 @@ project since the first release, with the latest changes at the top.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/seapagan/github-contrib-view/tree/HEAD)
+## [0.3.1](https://github.com/seapagan/github-contrib-view/releases/tag/0.3.1) (October 11, 2025)
 
-These are the changes that have been merged to the repository since the last
-release.
+**New Features**
 
-Everything in this section will be included in the next official release.
+- Mark compatible with the Python 3.14 release ([#14](https://github.com/seapagan/github-contrib-view/pull/14)) by [seapagan](https://github.com/seapagan)
+
+**Refactoring**
+
+- Modularize the code better for clarity. ([#11](https://github.com/seapagan/github-contrib-view/pull/11)) by [seapagan](https://github.com/seapagan)
 
 **Dependency Updates**
 
+- Update astral-sh/setup-uv action to v7 ([#13](https://github.com/seapagan/github-contrib-view/pull/13)) by [renovate[bot]](https://github.com/apps/renovate)
+- Update dependency uv_build to >=0.9.2,<0.10.0 ([#12](https://github.com/seapagan/github-contrib-view/pull/12)) by [renovate[bot]](https://github.com/apps/renovate)
 - Update actions/checkout action to v5 ([#9](https://github.com/seapagan/github-contrib-view/pull/9)) by [renovate[bot]](https://github.com/apps/renovate)
 - Update dependency uv_build to >=0.8.23,<0.9.0 ([#8](https://github.com/seapagan/github-contrib-view/pull/8)) by [renovate[bot]](https://github.com/apps/renovate)
 
-[`Full Changelog`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...HEAD) | [`Diff`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...HEAD.diff) | [`Patch`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...HEAD.patch)
+[`Full Changelog`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...0.3.1) | [`Diff`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...0.3.1.diff) | [`Patch`](https://github.com/seapagan/github-contrib-view/compare/0.3.0...0.3.1.patch)
 
 ## [0.3.0](https://github.com/seapagan/github-contrib-view/releases/tag/0.3.0) (September 10, 2025)
 

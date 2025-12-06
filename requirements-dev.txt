@@ -40,6 +40,6 @@ tomli==2.2.1 ; python_full_version < '3.11'
 typer==0.16.0
 types-requests==2.32.4.20250611
 typing-extensions==4.14.1
-urllib3==2.5.0
+urllib3==2.6.0
 virtualenv==20.31.2
 wrapt==1.17.2

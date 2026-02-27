@@ -2,17 +2,12 @@
 #    uv export --no-hashes --no-emit-project --output-file=requirements-dev.txt --no-annotate
 certifi==2025.10.5
 cffi==2.0.0 ; platform_python_implementation != 'PyPy'
-cfgv==3.4.0
 charset-normalizer==3.4.3
 click==8.1.8 ; python_full_version < '3.10'
 click==8.3.0 ; python_full_version >= '3.10'
 colorama==0.4.6 ; sys_platform == 'win32'
 cryptography==46.0.5
-distlib==0.4.0
-filelock==3.19.1 ; python_full_version < '3.10'
-filelock==3.20.0 ; python_full_version >= '3.10'
 github-changelog-md==0.9.6
-identify==2.6.15
 idna==3.10
 librt==0.8.1 ; platform_python_implementation != 'PyPy'
 markdown-it-py==3.0.0 ; python_full_version < '3.10'
@@ -20,13 +15,10 @@ markdown-it-py==4.0.0 ; python_full_version >= '3.10'
 mdurl==0.1.2
 mypy==1.19.1
 mypy-extensions==1.1.0
-nodeenv==1.9.1
 pastel==0.2.1
 pathspec==0.12.1
-platformdirs==4.4.0 ; python_full_version < '3.10'
-platformdirs==4.5.0 ; python_full_version >= '3.10'
 poethepoet==0.37.0
-pre-commit==4.3.0
+prek==0.3.3
 pycparser==2.23 ; implementation_name != 'PyPy' and platform_python_implementation != 'PyPy'
 pygithub==2.8.1
 pygments==2.19.2
@@ -45,4 +37,3 @@ typer==0.19.2
 types-requests==2.32.4.20250913
 typing-extensions==4.15.0
 urllib3==2.6.3
-virtualenv==20.35.3
